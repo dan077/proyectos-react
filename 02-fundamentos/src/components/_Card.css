@@ -1,0 +1,13 @@
+.card{
+    /* display: flex; */
+    width: 16rem !important;
+    text-align: center;
+    color: white;
+
+}
+
+img{
+    width: 80px !important;
+    height: 80px !important;
+    margin-top: .5rem!important;
+}
