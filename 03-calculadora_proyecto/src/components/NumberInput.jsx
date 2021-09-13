@@ -1,17 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { Operaciones } from '../helpers/operaciones';
 
 const NumberInput = ({setNumeros,numeros}) => {
     
     const {numero1,numero2} = numeros;
-    const handleChange = (e)=>{
-        setNumeros(
-            {
-                ...numeros,
-                [e.target.name] :parseFloat(e.target.value)
-            }
-        )
-    }
+    const {handleChange} = Operaciones(numeros,setNumeros)
+
     return (
         <>
             <label>

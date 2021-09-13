@@ -1,20 +1,22 @@
 import {useState} from 'react'
+import { Operaciones } from '../helpers/operaciones';
 import NumberInput from './NumberInput';
 import Resultado from './Resultado';
 
 const Calculadora = () => {
 
     const [numeros, setNumeros] = useState({numero1:0,numero2:0})
+    /*
     const operaciones = {
         "suma":"+",
         "resta":"-",
         "multiplicacion":"*",
         "division":"/",
-    };
-    
+    };*/
+    const {operaciones} = Operaciones(numeros,setNumeros)
     return (
         <div>
-            <NumberInput setNumeros = {setNumeros} numeros = {numeros} />
+            <NumberInput setNumeros = {setNumeros} numeros = {numeros}/>
 
             {
             Object.entries(operaciones).map( 
