@@ -5,7 +5,6 @@ const Effect = () => {
     const [users, setUsers] = useState([]);
     const [userId, setUserId] = useState(10);
 
-
     //UseEffect no deberia usar funciones asincronas.
     useEffect(() => {
         fetch("https://jsonplaceholder.typicode.com/users")
@@ -16,11 +15,17 @@ const Effect = () => {
     }, []);
 
     useEffect(() => {
-        console.log(userId)
+        console.log(userId);
     }, [userId]);
 
-    console.log(users);
-    console.log("hola");
+    /* forma correcta para controlar los useEffect cuando pueda presentar problemas
+    useEffect(() => {
+        effect
+        return () => {
+            cleanup
+        }
+    }, [input])
+    */
 
     const handleSubmit = (e) => {
         e.preventDefault(); //evita el resfesh de la pagina.
@@ -38,7 +43,12 @@ const Effect = () => {
             <Form onSubmit={handleSubmit}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
-                    <Form.Control onChange={(e) => setUserId(e.target.value)} value={userId} type="text" placeholder="Enter email" />
+                    <Form.Control
+                        onChange={(e) => setUserId(e.target.value)}
+                        value={userId}
+                        type="text"
+                        placeholder="Enter email"
+                    />
                 </Form.Group>
 
                 <Button variant="primary" type="submit">
