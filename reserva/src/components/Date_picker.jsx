@@ -39,14 +39,15 @@ const Date_picker = ({ value, onChange, title, readOnly }) => {
             <Fragment>
                 <ThemeProvider theme={materialTheme}>
                     <KeyboardDatePicker
-                        disabled
+                        readOnly
+                        onFocus={(e) => e.target.blur()}
                         variant="inline"
                         inputVariant="standard"
                         label={title}
                         format="dd/MM/yyyy"
                         value={value}
                         InputAdornmentProps={{ position: "start" }}
-                        onChange={onChange}
+                        //onChange={onChange}
                         theme={materialTheme}
                     />
                 </ThemeProvider>
@@ -75,8 +76,8 @@ const Date_picker = ({ value, onChange, title, readOnly }) => {
 };
 
 Date_picker.propTypes = {
-    value: PropTypes.instanceOf(Date),
-    onChange: PropTypes.func,
+    value: PropTypes.func,
+   // onChange: PropTypes.func,
     title: PropTypes.string,
     readOnly: PropTypes.bool,
 };

@@ -6,26 +6,23 @@ import { MuiPickersUtilsProvider } from "@material-ui/pickers";
 
 const Date_form = () => {
     const [selectedDateStart, handleDateStartChange] = useState(new Date());
-    const [selectedDateEnd, handleDateEndChange] = useState(new Date());
     const [days, setDays] = useState(1);
 
-    /**
-     * Corregir error. cuando incrementa el día la fecha final no camnbia
-     */
-    useEffect(() => {
-        handleChangeDateEnd(); //cuando cambie la fecha inicial
-    }, [selectedDateStart]);
-
-    const handleChangeDateEnd = () => {
+    const selectedDateEnd = () => {
         let copyObject = new Date(selectedDateStart);
         copyObject.setDate(copyObject.getDate() + days);
-        handleDateEndChange(copyObject);
+        console.log(copyObject);
+        return copyObject;
     };
+    /**
+     * Corregir error. cuando incrementa el día la fecha final no camnbia
+     * Erro corregifo 16:52. debia usar una funcion y no un state... (seguié investigando)
+     */
 
     const handleChange = (e) => {
         let _days = parseInt(e.target.value);
         setDays(_days);
-        handleChangeDateEnd();
+        //handleChangeEnd();
         console.log(_days);
     };
 
@@ -57,25 +54,24 @@ const Date_form = () => {
                                 size="sm"
                                 type="number"
                                 name="days"
-                                min = "1"
+                                min="1"
                                 aria-describedby="basic-addon1"
                                 onChange={handleChange}
                             />
                         </InputGroup>
                         <Date_picker
-                            value={selectedDateEnd}
-                            onChange={handleDateEndChange}
+                            value={selectedDateEnd()}
+                            //onChange={handleDateEndChange}
                             title="Fecha fin"
                             readOnly={true}
                         />
                     </div>
                 </MuiPickersUtilsProvider>
-                <Button
-                    variant="primary"
-                    className="d-flex justify-content-center"
-                >
-                    Reservar
-                </Button>
+                <div className="d-grid gap-2 col-6 mx-auto mt-2">
+                    <Button variant="info" className="block-center ">
+                        Reservar
+                    </Button>
+                </div>
             </Card.Body>
         </Card>
     );
