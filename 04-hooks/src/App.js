@@ -1,25 +1,27 @@
-import React from 'react'
-//import Calculadora from './components/Calculadora';
-import Effect from './components/Effect';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Ref from './components/Ref';
+// import Calculadora from "./components/Calculadora";
+// import Effect from "./components/Effect";
+// import State from "./components/State";
+// import LayoutEffect from "./components/LayoutEffect";
+// import Ref from "./components/Ref";
+// import Memorize from "./components/memos/Memorize";
 
-//import State from './components/State';
+import Custom from "./components/Custom";
+import Memorize from "./components/memos/Memorize";
 
 const App = () => {
   return (
     <div className="container text-center">
-      {/* <Effect /> */}
-      {/* <Ref/> */}
+      <Memorize />
     </div>
-    
-    //<State />
-    // <div>
-    //   <h1>Calculadora - PWA</h1>
-    //   <hr/>
-    //   <Calculadora/>
-    // </div>
-  )
-}
+    // <State />
 
-export default App
+    // <div className="container text-center">
+    //   <h1>Calculadora - PWA</h1>
+    //   <hr />
+
+    //   <Calculadora />
+    // </div>
+  );
+};
+
+export default App;

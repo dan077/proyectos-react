@@ -1,63 +1,52 @@
-import React, { useEffect, useState } from "react";
-import { Form, Button } from "react-bootstrap";
+import { useEffect, useState } from "react";
 
 const Effect = () => {
-    const [users, setUsers] = useState([]);
-    const [userId, setUserId] = useState(10);
+  const [state, setState] = useState(0);
 
-    //UseEffect no deberia usar funciones asincronas.
-    useEffect(() => {
-        fetch("https://jsonplaceholder.typicode.com/users")
-            .then((res) => res.json()) //espera la respuesta del fetch.
-            .then((data) => {
-                setUsers(data);
-            }); //espera la respuesta del .json()
-    }, []);
+  const evento = (e) => {
+    console.log("moviendo");
+  };
 
-    useEffect(() => {
-        console.log(userId);
-    }, [userId]);
+  useEffect(() => {
+    if (state === "123") {
+      window.addEventListener("mousemove", evento);
+    }
 
-    /* forma correcta para controlar los useEffect cuando pueda presentar problemas
-    useEffect(() => {
-        effect
-        return () => {
-            cleanup
-        }
-    }, [input])
-    */
-
-    const handleSubmit = (e) => {
-        e.preventDefault(); //evita el resfesh de la pagina.
-        setUserId(0);
-        console.log({
-            name: "hola",
-            email: "sdf@miWmail.com",
-            password: "dfsdfsfd",
-        });
+    return () => {
+      console.log("detenido");
+      window.removeEventListener("mousemove", evento);
     };
+  }, [state]);
 
-    return (
-        <div>
-            <h1>useEffect</h1>
-            <Form onSubmit={handleSubmit}>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
-                    <Form.Control
-                        onChange={(e) => setUserId(e.target.value)}
-                        value={userId}
-                        type="text"
-                        placeholder="Enter email"
-                    />
-                </Form.Group>
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
 
-                <Button variant="primary" type="submit">
-                    Submit
-                </Button>
-            </Form>
-            <hr />
+  return (
+    <>
+      <h1>useEffect</h1>
+      <hr />
+      <form onSubmit={handleSubmit}>
+        <div className="mb-3">
+          <label htmlFor="exampleInputEmail1" className="form-label">
+            Search
+          </label>
+          <input
+            onChange={(e) => setState(e.target.value)}
+            value={state}
+            type="text"
+            className="form-control"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+          />
         </div>
-    );
+
+        <button type="submit" className="btn btn-primary">
+          Submit
+        </button>
+      </form>
+    </>
+  );
 };
 
 export default Effect;

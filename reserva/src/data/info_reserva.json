@@ -1,0 +1,8 @@
+{
+    "Precio_Día":98000,
+    "Tarifa_proveedores": [{
+        "Trivago":0.15,
+        "Recomendaciones Magdalena":0.6,
+        "Booking":0.11
+    }]
+}

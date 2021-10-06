@@ -72,6 +72,7 @@ const Date_form = () => {
                         Reservar
                     </Button>
                 </div>
+                {/* Faltan seleccionar el proveedor para poder dar un preico */}
             </Card.Body>
         </Card>
     );

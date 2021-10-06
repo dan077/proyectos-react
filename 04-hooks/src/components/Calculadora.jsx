@@ -1,37 +1,11 @@
-import {useState} from 'react'
-import { Operaciones } from '../helpers/operaciones';
-import NumberInput from './NumberInput';
-import Resultado from './Resultado';
+import NumberInput from "./NumberInput";
 
 const Calculadora = () => {
+  return (
+    <div>
+      <NumberInput />
+    </div>
+  );
+};
 
-    const [numeros, setNumeros] = useState({numero1:0,numero2:0})
-    /*
-    const operaciones = {
-        "suma":"+",
-        "resta":"-",
-        "multiplicacion":"*",
-        "division":"/",
-    };*/
-    const {operaciones} = Operaciones(numeros,setNumeros)
-    return (
-        <div>
-            <NumberInput setNumeros = {setNumeros} numeros = {numeros}/>
-
-            {
-            Object.entries(operaciones).map( 
-                (array) => {
-                    let key = array[0];
-                    let value = array[1];
-                    let expresion = `(${numeros.numero1})  ${value}  (${numeros.numero2})`;
-                    //console.log(expresion)
-                    let calculo = eval(expresion)
-                    return <Resultado operacion={key} calculo = {calculo}/>
-                })
-            }
-            
-        </div>
-    )
-}
-
-export default Calculadora
+export default Calculadora;
