@@ -1,21 +1,26 @@
 import React, { useState,useEffect, useCallback } from "react";
 import Card from "./Card";
+import FormularioBuscador from "./FormularioBuscador";
 
 const Cards = () => {
+    //const load = Loading();
     const [Imgs, setImgs] = useState([]);
     const [Search, setSearch] = useState("")
 
     const [Page, setPage] = useState(1)
+    const [StatusLoading, setStatusLoading] = useState(false)
+    
+    const getImgs = useCallback(async () => {
 
-   const getImgs = useCallback(async () => {
-       const apiKey = "client_id=da3mbfEiZewXXR5P19FOY_H_koSzP10nh9qIm49lG0c";
-       let url = `https://api.unsplash.com/photos?page=${Page}&${apiKey}`;
-       if (Search !== "") {
-           url = `https://api.unsplash.com/search/photos?page=${Page}&query=${encodeURI(
-               Search
-           )}&per_page=50&${apiKey}`;
-       }
-       console.log(url);
+        setStatusLoading(true)
+        const apiKey = "client_id=da3mbfEiZewXXR5P19FOY_H_koSzP10nh9qIm49lG0c";
+        let url = `https://api.unsplash.com/photos?page=${Page}&${apiKey}`;
+        if (Search !== "") {
+            url = `https://api.unsplash.com/search/photos?page=${Page}&query=${encodeURI(
+                Search
+            )}&per_page=50&${apiKey}`;
+        }
+
        const response = await fetch(url);
        const data = await response.json();
        if (data.results) {
@@ -23,6 +28,8 @@ const Cards = () => {
        } else {
            setImgs(data);
        }
+       setStatusLoading(false);
+       
    },[Search,Page]);
 
     useEffect(() => {
@@ -61,21 +68,11 @@ const Cards = () => {
     
     return (
         <>
-            <form onSubmit={handleSubmit}>
-                <div className="mb-3 my-3 row align-items-center">
-                    <div className="col-auto">
-                        <label className="form-label text-center">Buscar</label>
-                    </div>
-                    <div className="col-auto">
-                        <input
-                            type="search"
-                            className="form-control"
-                            name="search"
-                            aria-describedby="emailHelp"
-                        />
-                    </div>
-                </div>
-            </form>
+            <FormularioBuscador
+                handleSubmit={handleSubmit}
+                StatusLoading={StatusLoading}
+            />
+
             <div className="btn-group" role="group">
                 {crearBotonPage()}
             </div>
